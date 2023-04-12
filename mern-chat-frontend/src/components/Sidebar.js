@@ -7,6 +7,7 @@ import { Avatar } from '@mui/material';
 import CircleIcon from '@mui/icons-material/Circle';
 import GroupIcon from '@mui/icons-material/Group';
 import PersonIcon from '@mui/icons-material/Person';
+import { SOCKET_URL } from '../constants/global';
 
 
 const Sidebar = () => {
@@ -18,7 +19,8 @@ const Sidebar = () => {
 		if(user && !isInit) {
 			// get rooms
 			// fetch('http://localhost:5000/rooms')
-			fetch('https://mern-chatapp-server.onrender.com/rooms')
+			// fetch('https://mern-chatapp-server.onrender.com/rooms')
+			fetch(`${SOCKET_URL}/rooms`)
 				.then(response => response.json())
 				.then(data => setRooms(data))
 				.catch(err => console.log(err.message));

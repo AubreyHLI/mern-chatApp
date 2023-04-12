@@ -1,8 +1,9 @@
+import { SOCKET_URL } from '../constants/global';
 import React, { useState } from "react";
 import { io } from "socket.io-client";
 
 // const SOCKET_URL = 'http://localhost:5000';
-const SOCKET_URL = 'https://mern-chatapp-server.onrender.com';
+// const SOCKET_URL = 'https://mern-chatapp-server.onrender.com';
 
 export const socket = io(SOCKET_URL);
 

@@ -55,7 +55,7 @@ const io = require('socket.io')(server, {
 io.on('connection', (socket) => {
     // handle different events
     socket.on('new-user', async () => {
-        const members = await User.find();  // get all members in db
+        const members = await User.find().sort({"_id": -1});  // get all members in db
         io.emit('new-user', members);
     })
 
