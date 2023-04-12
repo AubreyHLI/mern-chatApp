@@ -46,7 +46,8 @@ const server = http.createServer(app);
 const io = require('socket.io')(server, {
     // will not have any cross origin errors while building our app
     cors: {
-        origin: 'http://localhost:3000',
+        // origin: 'http://localhost:3000',
+        origin: 'https://mern-chatapp-client.onrender.com',
         methods: ['GET', 'POST']
     }
 });
