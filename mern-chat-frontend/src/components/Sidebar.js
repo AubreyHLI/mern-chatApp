@@ -17,7 +17,8 @@ const Sidebar = () => {
     useEffect(() => {
 		if(user && !isInit) {
 			// get rooms
-			fetch('http://localhost:5000/rooms')
+			// fetch('http://localhost:5000/rooms')
+			fetch('https://mern-chatapp-server.onrender.com/rooms')
 				.then(response => response.json())
 				.then(data => setRooms(data))
 				.catch(err => console.log(err.message));
