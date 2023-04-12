@@ -7,7 +7,7 @@ dotenv.config();
 
 const cloudinary = require('./cloudinary');
 
-const rooms = ['general', 'tech', 'finance', 'crypto'];
+
 const cors = require('cors');
 const userRoutes = require('./routes/userRoutes');
 
@@ -27,9 +27,11 @@ app.use('/users', userRoutes);
 const Message = require('./models/MessageModel');
 const User = require('./models/UserModel');
 
+const rooms = ['general', 'tech', 'finance', 'crypto'];
 app.get('/rooms', (request, response) => {
     response.json(rooms);
 });
+
 
 const getLastMsgsFromRoom = async (roo) => {
     let roomMsgs = await Message.aggregate([
@@ -47,7 +49,16 @@ const io = require('socket.io')(server, {
     // will not have any cross origin errors while building our app
     cors: {
         origin: process.env.CLIENT_URL,
-        methods: ['GET', 'POST']
+        handlePreflightRequest: (req, res) => {
+            res.writeHead(200, {
+              "Access-Control-Allow-Origin": process.env.CLIENT_URL,
+              "Access-Control-Allow-Methods": "GET,POST",
+              "Access-Control-Allow-Headers": "my-custom-header",
+              "Access-Control-Allow-Credentials": true
+            });
+            res.end();
+        }
+        // methods: ['GET', 'POST']
     }
 });
 
