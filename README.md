@@ -1,0 +1,1 @@
+A full stack chat app built by MongoDB, Express.js, React, Node.js and Socket.io.
