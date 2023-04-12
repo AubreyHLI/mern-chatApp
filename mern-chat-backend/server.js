@@ -49,16 +49,7 @@ const io = require('socket.io')(server, {
     // will not have any cross origin errors while building our app
     cors: {
         origin: process.env.CLIENT_URL,
-        handlePreflightRequest: (req, res) => {
-            res.writeHead(200, {
-              "Access-Control-Allow-Origin": process.env.CLIENT_URL,
-              "Access-Control-Allow-Methods": "GET,POST",
-              "Access-Control-Allow-Headers": "my-custom-header",
-              "Access-Control-Allow-Credentials": true
-            });
-            res.end();
-        }
-        // methods: ['GET', 'POST']
+        methods: ['GET', 'POST']
     }
 });
 
