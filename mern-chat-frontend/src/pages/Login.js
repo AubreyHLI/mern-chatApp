@@ -29,7 +29,7 @@ const Login = () => {
     <Form className='login' onSubmit={handleLogin}>
         <h1 className='text-center login-heading'>Log in to chatapp</h1>
 
-        {error && <p className='alert alert-danger'>{error.data}</p>}
+        {error && <p className='alert alert-danger py-1'>{error.data}</p>}
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
@@ -40,8 +40,8 @@ const Login = () => {
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} required/>
         </Form.Group>
-        <Button variant="primary" type="submit">
-            {isLoading ? 'Log in...' :'Log in' }
+        <Button variant="primary" type="submit" style={{width: 80}}>
+            {isLoading ? <Spinner animation="border" size="sm" />:'Log in' }
         </Button>
 
         <div className='py-4'>
