@@ -47,7 +47,7 @@ const server = http.createServer(app);
 const io = require('socket.io')(server, {
     // will not have any cross origin errors while building our app
     cors: {
-        origin: '*',
+        origin: process.env.CLIENT_URL,
         methods: ['GET', 'POST']
     }
 });
