@@ -16,7 +16,10 @@ app.use(express.urlencoded({extended: true}));
 // an Express built-in middleware to recognize the incoming Request Object as a JSON Object
 app.use(express.json());
 // use the cors middleware to allow fontend and backend to communicate
-app.use(cors());
+app.use(cors({
+        origin: process.env.CLIENT_URL,
+        methods: ['GET', 'POST']
+    }));
 
 require('./connection');
 
