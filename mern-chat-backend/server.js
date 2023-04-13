@@ -18,7 +18,7 @@ app.use(express.json());
 // use the cors middleware to allow fontend and backend to communicate
 app.use(cors({
         origin: process.env.CLIENT_URL,
-        methods: ['GET', 'POST']
+        methods: ['GET', 'POST', 'DELETE']
     }));
 
 require('./connection');
