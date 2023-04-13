@@ -7,6 +7,7 @@ const User = require('../models/UserModel');
 // POST request on the users/ router
 router.post('/', async(request, response) => {
     // signup => create newUser to database
+    response.setHeader("Access-Control-Allow-Origin", "true");
     try {
         const { name, email, password, picture } = request.body;
         console.log(request.body);
@@ -33,6 +34,7 @@ router.post('/', async(request, response) => {
 // POST request on the login router
 router.post('/login', async(request, response) => {
     // login => find user in database
+    response.setHeader("Access-Control-Allow-Origin", "true");
     try {
         const { email, password } = request.body;
         const user = await User.findByCredentials(email, password);
