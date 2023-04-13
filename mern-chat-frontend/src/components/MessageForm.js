@@ -152,7 +152,7 @@ const MessageForm = () => {
                                 <div className='message-box'>
                                     { m.content 
                                     ? <p className='message-content'>{m.content}</p> 
-                                    : <img className='message-img' src={m.image.url} alt=''/>
+                                    : <img className='message-img' src={m.image.url} alt='' loading="lazy"/>
                                     }
                                     <p className='message-timestamp'>{m.time}</p>
                                 </div>

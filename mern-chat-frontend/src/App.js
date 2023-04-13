@@ -1,6 +1,6 @@
 import './App.css';
 import Navigation from './components/Navigation';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -12,7 +12,7 @@ function App() {
   const user = useSelector(state => state.user);
 
   return (
-    <BrowserRouter>
+    <HashRouter >
       <div className='app'>
         <Navigation />
         <Routes>
@@ -27,7 +27,7 @@ function App() {
           }
         </Routes>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

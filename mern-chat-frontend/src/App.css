@@ -236,6 +236,7 @@
 .message-img {
   height: 200px;
   margin: 5px 0 10px;
+  background-color: white;
 }
 
 .message-timestamp {
