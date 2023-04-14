@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { Badge, Button, Col, Form, Row } from 'react-bootstrap';
+import { Badge, Button, Col, Form, Modal, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { AppContext } from '../context/appContext';
 import { Avatar } from '@mui/material';
@@ -14,6 +14,8 @@ const MessageForm = () => {
     const user = useSelector(state => state.user);
     const [messageInput, setMessageInput] = useState("");
     const [showEmojis, setShowEmojis] = useState(false);
+    const [lgImgShow, setLgImgShow] = useState(false);
+    const [clickedImg, setClickedImg] = useState(null);
     const {socket, currentRoom, messages, setMessages, privateMemberMsg} = useContext(AppContext);
     const messageEndRef = useRef(null);
     const emojiDivRef = useRef(null);
@@ -42,7 +44,7 @@ const MessageForm = () => {
     socket.off('room-messages').on('room-messages', roomMsgs => {
         setMessages(roomMsgs);
         setMessageInput("");
-        console.log('roomMsgs:', roomMsgs);
+        // console.log('roomMsgs:', roomMsgs);
     })
 
 
@@ -121,6 +123,12 @@ const MessageForm = () => {
     }
 
 
+    const handleClickImage = (imgUrl) => {
+        setClickedImg(imgUrl); 
+        setLgImgShow(true);
+    }
+
+
     return (
     <div className='message-form'>
         {user && <div className='message-output-heading'>
@@ -152,7 +160,15 @@ const MessageForm = () => {
                                 <div className='message-box'>
                                     { m.content 
                                     ? <p className='message-content'>{m.content}</p> 
-                                    : <img className='message-img' src={m.image.url} alt='' loading="lazy"/>
+                                    : <>
+                                        <img className='message-img' src={m.image.url} alt='' loading="lazy" onClick={() => handleClickImage(m.image.url)}/>
+                                        <Modal show={lgImgShow && clickedImg === m.image.url} onHide={() => setLgImgShow(false)} aria-labelledby="example-modal-sizes-title-lg">
+                                            <Modal.Header closeButton />
+                                            <Modal.Body>
+                                                <img src={m.image.url} alt='' className='message-img-lg' loading="lazy"/>
+                                            </Modal.Body>
+                                        </Modal>
+                                    </>
                                     }
                                     <p className='message-timestamp'>{m.time}</p>
                                 </div>

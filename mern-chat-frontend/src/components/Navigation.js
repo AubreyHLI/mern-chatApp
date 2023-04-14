@@ -28,7 +28,7 @@ const Navigation = () => {
   }
 
   return (
-    <Navbar bg="light" expand="md">
+    <Navbar bg="light" expand="md" style={{height: 72}}>
       <Container fluid='xl' style={{paddingInline: 25}}>
         <LinkContainer to='/'>
             <Navbar.Brand className='d-flex align-items-center'>

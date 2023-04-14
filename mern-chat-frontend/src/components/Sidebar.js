@@ -16,6 +16,7 @@ const Sidebar = () => {
 	const dispatch = useDispatch();
     
     useEffect(() => {
+		console.log('user:',user);
 		if(user && !isInit) {
 			// get rooms
 			// fetch('http://localhost:5000/rooms')

@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <div className='home' >
         <h1>Share the world with your friends</h1>
-        <p>Chat App lets you connect with the world</p>
+        <p>MernChat lets you connect with the world</p>
         <LinkContainer to={ !user ? "/login" : "/chat"}>
             <Button variant="success">
                 Get Started

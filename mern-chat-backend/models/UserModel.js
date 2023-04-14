@@ -47,10 +47,10 @@ UserSchema.methods.toJSON = function() {
 // Schema Statics are methods that can be invoked directly by a Model (unlike Schema Methods, which need to be invoked by an instance of a Mongoose document).
 UserSchema.statics.findByCredentials = async function (email, password) {
     const user = await User.findOne({email: email});
-    if(!user) throw new Error('invalid email');
+    if(!user) throw new Error('该用户不存在');
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if(!isMatch)  throw new Error('invalid password');
+    if(!isMatch)  throw new Error('密码错误');
 
     return user;  //else
 }

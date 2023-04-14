@@ -1,14 +1,17 @@
 const express = require('express');
 const app = express();
-
+const cors = require('cors');
+const http = require('http');
 // get .env variables
 const dotenv = require ('dotenv');
 dotenv.config();
 
+require('./connection');
 const cloudinary = require('./cloudinary');
-
-const cors = require('cors');
+const Message = require('./models/MessageModel');
+const User = require('./models/UserModel');
 const userRoutes = require('./routes/userRoutes');
+const rooms = ['general', 'tech', '英语课'];
 
 // middleware
 // an Express built-in middleware to parse form data as strings or arrays
@@ -19,21 +22,14 @@ app.use(express.json());
 app.use(cors({
         origin: process.env.CLIENT_URL,
         methods: ['GET', 'POST', 'DELETE']
-    }));
-
-require('./connection');
+}));
 
 // use the userRoutes middleware on /users routes
 app.use('/users', userRoutes);
 
-const Message = require('./models/MessageModel');
-const User = require('./models/UserModel');
-
-const rooms = ['general', 'tech', 'finance', 'crypto'];
 app.get('/rooms', (request, response) => {
     response.json(rooms);
 });
-
 
 const getLastMsgsFromRoom = async (roo) => {
     let roomMsgs = await Message.aggregate([
@@ -45,13 +41,12 @@ const getLastMsgsFromRoom = async (roo) => {
 };
 
 // socket.io Server Initialization
-const http = require('http');
 const server = http.createServer(app);
 const io = require('socket.io')(server, {
     // will not have any cross origin errors while building our app
     cors: {
         origin: process.env.CLIENT_URL,
-        methods: ['GET', 'POST']
+        methods: ['GET', 'POST', 'DELETE']
     }
 });
 
