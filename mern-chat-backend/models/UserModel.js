@@ -55,23 +55,25 @@ UserSchema.statics.findByCredentials = async function (email, password) {
     return user;  //else
 }
 
+
 // 'pre' middleware functions, this 'pre' called before using the 'save' method
 UserSchema.pre('save', function(next) {
     const user = this;
-    if(!user.isModified('password')) {  // check if password is modified
-        next();
-    } else {
-        bcrypt.genSalt(10, function (err, salt) { // generate a salt and hash on separate function calls
-            bcrypt.hash(user.password, salt, function(err, hash) {
-                if(err) {
-                    return next(err);
-                } else {
-                    user.password = hash; // Store hash in your password DB.
-                    next();
-                }
-            });
-        })
-    }
+    // check if password is modified
+    if(!user.isModified('password')) {
+        return next();
+    } 
+
+    // else
+    bcrypt.genSalt(10, function (err, salt) { // generate a salt and hash on separate function calls
+        bcrypt.hash(user.password, salt, function(err, hash) {
+            if(err) return next(err);
+                
+            user.password = hash; // Store hash in your password DB.
+            next();
+        });
+    })
+    
 })
 
 

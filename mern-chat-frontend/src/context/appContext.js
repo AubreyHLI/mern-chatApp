@@ -1,4 +1,4 @@
-import { SOCKET_URL } from '../constants/global';
+import { SOCKET_URL } from '../constant/server';
 import React, { useState } from "react";
 import { io } from "socket.io-client";
 

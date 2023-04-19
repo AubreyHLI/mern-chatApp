@@ -8,23 +8,21 @@ const User = require('../models/UserModel');
 router.post('/', async(request, response) => {
     // signup => create newUser to database
     try {
-        const { name, email, password, picture } = request.body;
-        console.log(request.body);
+        const { name, email, password } = request.body;
         const newUser = await User.create({
             name: name,
             email: email,
             password: password,
-            picture: picture
         });
         response.status(201).json(newUser); // status 201 : created
     } catch (err) {
         let errMsg;
         if(err.code === 11000) {
-            errMsg = '用户已存在'
+            errMsg = '该邮箱已被注册, 请使用其他邮箱'
         } else {
             errMsg = err.message;
         }
-        console.log(err);
+        console.log('serverside signup error:',err.message);
         response.status(400).json(errMsg);
     }
 });

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { SOCKET_URL } from '../../constants/global';
+import { SOCKET_URL } from '../../constant/server';
 
 // define a service iser a base URL
 const appApi = createApi({

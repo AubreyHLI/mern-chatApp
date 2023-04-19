@@ -1,12 +1,12 @@
 const express = require('express');
 const app = express();
+
+// config app
+require ('dotenv').config();
+require('./connection');
+
 const cors = require('cors');
 const http = require('http');
-// get .env variables
-const dotenv = require ('dotenv');
-dotenv.config();
-
-require('./connection');
 const cloudinary = require('./cloudinary');
 const Message = require('./models/MessageModel');
 const User = require('./models/UserModel');

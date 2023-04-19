@@ -4,6 +4,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Avatar } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useSignupUserMutation } from '../redux/services/appApi';
+import { addAvatarPicture } from '../redux/slices/userSlice';
+import { useDispatch } from 'react-redux';
+
 
 const Signup = () => {
     const [name, setName] = useState('');
@@ -15,6 +18,7 @@ const Signup = () => {
 
     const [signupUser, { isLoading, error }] = useSignupUserMutation();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
 
     // show image
@@ -51,19 +55,16 @@ const Signup = () => {
 
     const handleSignup = async (e) => {
         e.preventDefault();
-        if(!image) {
-            return alert('Please upload your profile picture');
-        } else {
-            const url = await uploadImage(image);
-            console.log(url);
-            // signup the user
-            signupUser({name, email, password, picture: url})
-                .then((response) => {
-                    const { data } = response;
-                    if(data) {
-                        navigate('/chat');
-                    }
-                })
+        try {
+            const response  = await signupUser({name, email, password});
+            if(response.data && image) {
+                const url = await uploadImage();
+                console.log(url);
+                dispatch(addAvatarPicture(url));
+                navigate('/chat');
+            }
+        } catch(err) {
+            console.log(err);
         }
     }
     

@@ -18,6 +18,9 @@ export const userSlice = createSlice({
         resetNotifications: (state, { payload }) => {
             delete state.newMessages[payload];
         },
+        addAvatarPicture: (state, { payload }) => {
+            state.picture = payload;
+        }
     },
 
     extraReducers: (builder) => {
@@ -31,5 +34,5 @@ export const userSlice = createSlice({
 });
 
 
-export const { addNotifications, resetNotifications } = userSlice.actions;
+export const { addNotifications, resetNotifications, addAvatarPicture } = userSlice.actions;
 export default userSlice.reducer;

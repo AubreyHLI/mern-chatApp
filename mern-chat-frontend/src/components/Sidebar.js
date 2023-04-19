@@ -7,7 +7,7 @@ import { Avatar } from '@mui/material';
 import CircleIcon from '@mui/icons-material/Circle';
 import GroupIcon from '@mui/icons-material/Group';
 import PersonIcon from '@mui/icons-material/Person';
-import { SOCKET_URL } from '../constants/global';
+import { SOCKET_URL } from '../constant/server';
 
 
 const Sidebar = () => {
