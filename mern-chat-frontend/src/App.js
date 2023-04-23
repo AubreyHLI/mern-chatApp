@@ -12,22 +12,24 @@ function App() {
   const user = useSelector(state => state.user);
 
   return (
-    <HashRouter >
+    <BrowserRouter >
       <div className='app'>
         <Navigation />
         <Routes>
-          <Route path='/' exact element={<Home />} />
-          {!user && <>
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<Signup />} />
-          </>
-          }
-          {user && 
-          <Route path='/chat' element={<Chat />} />
-          }
+          <Route path='/'>
+            <Route index exact element={<Home />} />
+            {!user && <>
+            <Route path='login' element={<Login />} />
+            <Route path='signup' element={<Signup />} />
+            </>
+            }
+            {user && 
+            <Route path='chat' element={<Chat />} />
+            }
+          </Route>
         </Routes>
       </div>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 
