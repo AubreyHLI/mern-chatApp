@@ -17,7 +17,7 @@ function App() {
         <Navigation />
         <Routes>
           <Route path='/'>
-            <Route index exact element={<Home />} />
+            <Route index element={<Home />} />
             {!user && <>
             <Route path='login' element={<Login />} />
             <Route path='signup' element={<Signup />} />
