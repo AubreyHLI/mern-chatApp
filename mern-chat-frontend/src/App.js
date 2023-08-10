@@ -1,11 +1,12 @@
 import './App.css';
 import Navigation from './components/Navigation';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Chat from './pages/Chat';
-import { useSelector } from 'react-redux';
+import ForgetPW from './pages/ForgetPW';
 
 
 function App() {  
@@ -19,8 +20,9 @@ function App() {
           <Route path='/'>
             <Route index exact element={<Home />} />
             {!user && <>
-            <Route path='login' element={<Login />} />
-            <Route path='signup' element={<Signup />} />
+              <Route path='login' element={<Login />} />
+              <Route path='signup' element={<Signup />} />
+              <Route path='forgetPw' element={<ForgetPW />} />
             </>
             }
             {user && 

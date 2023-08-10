@@ -31,6 +31,13 @@ const appApi = createApi({
                 body: user
             })
         }),
+        changePw: builder.mutation({
+            query: (user) => ({
+                url: '/users/changePw',
+                method: 'POST',
+                body: user
+            })
+        }),
     }),
 });
 
@@ -38,6 +45,8 @@ const appApi = createApi({
 export const { 
     useSignupUserMutation, 
     useLoginUserMutation, 
-    useLogoutUserMutation } = appApi;
+    useLogoutUserMutation,
+    useChangePwMutation 
+} = appApi;
 
 export default appApi;

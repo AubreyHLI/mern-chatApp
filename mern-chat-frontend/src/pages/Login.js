@@ -49,6 +49,11 @@ const Login = () => {
                 Don't have an account ? <Link to='/signup'>Signup</Link>
             </p>
         </div>
+        <div className='py-4'>
+            <p className='text-center'>
+                Forget password ? <Link to='/forgetPw'>Find back password</Link>
+            </p>
+        </div>
     </Form>  
   )
 }

@@ -44,5 +44,31 @@ router.post('/login', async(request, response) => {
     }
 });
 
+router.post('/changePw', async(request, response) => {
+    try {
+        const { email, newPw, answer } = request.body;
+        if(!email) {
+            response.status(400).send('Email is required!');
+        }
+        if(!newPw) {
+            response.status(400).send('New Password is required!');
+        }
+        if(!answer) {
+            response.status(400).send('Answer is required!');
+        }
+        
+        const user = await User.findOne({email, pwanswer: answer});
+        if(!user) {
+            response.status(404).send('Wrong email or answer!');
+        }
+        user.password = newPw;       
+        await user.save(); 
+
+        response.status(200).json(user);
+    } catch (err) {
+        response.status(400).json(err.message);
+    }
+});
+
 
 module.exports = router;

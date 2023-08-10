@@ -32,6 +32,9 @@ const UserSchema = new Schema({
     status: {
         type: String,
         default: "online"
+    },
+    pwanswer: {
+        type: String
     }
 }, { minimize: false });
 
